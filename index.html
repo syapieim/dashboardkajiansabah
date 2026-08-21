@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Analisis Kajian JPN Sabah 2026</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans p-4 md:p-8">
+
+    <div class="max-w-7xl mx-auto space-y-6">
+        
+        <!-- Header -->
+        <div class="bg-indigo-900 text-white rounded-2xl p-6 shadow-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h1 class="text-2xl md:text-3xl font-bold">Dashboard Analisis Kajian JPN Sabah 2026</h1>
+                <p class="text-indigo-200 text-sm mt-1">Status & Taburan Permohonan Penyelidikan Pendidikan</p>
+            </div>
+            <span class="bg-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm">
+                Status Data: 100% Selesai Diproses
+            </span>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Jumlah Permohonan</p>
+                <p class="text-3xl font-extrabold text-slate-900 mt-2">55</p>
+                <p class="text-xs text-emerald-600 mt-1">↑ Semua permohonan siri 2026</p>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Peringkat Sarjana (Master)</p>
+                <p class="text-3xl font-extrabold text-indigo-600 mt-2">24</p>
+                <p class="text-xs text-slate-500 mt-1">43.6% daripada jumlah keseluruhan</p>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Doktor Falsafah (PhD)</p>
+                <p class="text-3xl font-extrabold text-violet-600 mt-2">16</p>
+                <p class="text-xs text-slate-500 mt-1">29.1% daripada jumlah keseluruhan</p>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Daerah Tertinggi (PPD)</p>
+                <p class="text-3xl font-extrabold text-amber-600 mt-2">Tuaran</p>
+                <p class="text-xs text-slate-500 mt-1">14 Projek penyelidikan</p>
+            </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Chart 1: Peringkat Pengajian -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                <h2 class="text-base font-bold text-slate-800 mb-4">Peringkat Pengajian / Kelayakan</h2>
+                <div class="relative h-64">
+                    <canvas id="peringkatChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 2: Taburan Mengikut PPD / Daerah -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm lg:col-span-2 flex flex-col justify-between">
+                <h2 class="text-base font-bold text-slate-800 mb-4">Taburan Kajian Mengikut Daerah Utama (PPD)</h2>
+                <div class="relative h-64">
+                    <canvas id="daerahChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Chart 3: Trend Bulanan -->
+            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm lg:col-span-3 flex flex-col justify-between">
+                <h2 class="text-base font-bold text-slate-800 mb-4">Trend Permohonan Diproses Mengikut Bulan (2026)</h2>
+                <div class="relative h-64">
+                    <canvas id="bulanChart"></canvas>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Data & Chart Execution -->
+    <script>
+        // 1. Doughnut Chart: Peringkat Pengajian
+        new Chart(document.getElementById('peringkatChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Sarjana (Master)', 'Doktor Falsafah (PhD)', 'Sarjana Muda', 'Geran / Penyelidikan'],
+                datasets: [{
+                    data: [24, 16, 6, 4],
+                    backgroundColor: ['#6366f1', '#8b5cf6', '#3b82f6', '#10b981']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { position: 'bottom' } }
+            }
+        });
+
+        // 2. Bar Chart: Daerah / PPD
+        new Chart(document.getElementById('daerahChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Tuaran', 'Kota Kinabalu', 'Ranau', 'Beaufort', 'Tawau', 'Sandakan', 'Papar', 'Keningau'],
+                datasets: [{
+                    label: 'Jumlah Kajian',
+                    data: [14, 12, 7, 6, 6, 5, 5, 4],
+                    backgroundColor: '#4f46e5',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true } },
+                plugins: { legend: { display: false } }
+            }
+        });
+
+        // 3. Line Chart: Trend Bulanan
+        new Chart(document.getElementById('bulanChart'), {
+            type: 'line',
+            data: {
+                labels: ['Januari', 'Februari', 'Mac', 'April'],
+                datasets: [{
+                    label: 'Permohonan Diproses',
+                    data: [17, 18, 11, 9],
+                    borderColor: '#059669',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: { y: { beginAtZero: true } }
+            }
+        });
+    </script>
+</body>
+</html>
