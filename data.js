@@ -1,1 +1,1 @@
-const DATA=[];
+const DATA=[{"bil":1,"tarikhProses":"07 Januari 2026","nama":"MURTE BINTI SALEH","tajuk":"PENGURUSAN PERPUSTAKAAN DIGITAL DALAM KALANGAN GURU BESAR SEKOLAH RENDAH DAERAH SANDAKAN","sampel":"Guru Besar sekolah rendah","ppd":"Sandakan","semuaPPD":"","bulan":"Januari","status":"tiada halangan","peringkat":"Doktor Falsafah","progres":"Selesai"}];
