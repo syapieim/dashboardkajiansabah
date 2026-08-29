@@ -1,142 +1,36 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Analisis Kajian JPN Sabah 2026</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dashboard Analisis Kajian JPN Sabah 2026</title>
+<script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans p-4 md:p-8">
-
-    <div class="max-w-7xl mx-auto space-y-6">
-        
-        <!-- Header -->
-        <div class="bg-indigo-900 text-white rounded-2xl p-6 shadow-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-                <h1 class="text-2xl md:text-3xl font-bold">Dashboard Analisis Kajian JPN Sabah 2026</h1>
-                <p class="text-indigo-200 text-sm mt-1">Status & Taburan Permohonan Penyelidikan Pendidikan</p>
-            </div>
-            <span class="bg-emerald-500 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm">
-                Status Data: 100% Selesai Diproses
-            </span>
-        </div>
-
-        <!-- Metric Cards -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Jumlah Permohonan</p>
-                <p class="text-3xl font-extrabold text-slate-900 mt-2">55</p>
-                <p class="text-xs text-emerald-600 mt-1">↑ Semua permohonan siri 2026</p>
-            </div>
-            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Peringkat Sarjana (Master)</p>
-                <p class="text-3xl font-extrabold text-indigo-600 mt-2">24</p>
-                <p class="text-xs text-slate-500 mt-1">43.6% daripada jumlah keseluruhan</p>
-            </div>
-            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Doktor Falsafah (PhD)</p>
-                <p class="text-3xl font-extrabold text-violet-600 mt-2">16</p>
-                <p class="text-xs text-slate-500 mt-1">29.1% daripada jumlah keseluruhan</p>
-            </div>
-            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
-                <p class="text-xs font-medium text-slate-500 uppercase tracking-wider">Daerah Tertinggi (PPD)</p>
-                <p class="text-3xl font-extrabold text-amber-600 mt-2">Tuaran</p>
-                <p class="text-xs text-slate-500 mt-1">14 Projek penyelidikan</p>
-            </div>
-        </div>
-
-        <!-- Charts Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            
-            <!-- Chart 1: Peringkat Pengajian -->
-            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-                <h2 class="text-base font-bold text-slate-800 mb-4">Peringkat Pengajian / Kelayakan</h2>
-                <div class="relative h-64">
-                    <canvas id="peringkatChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Chart 2: Taburan Mengikut PPD / Daerah -->
-            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm lg:col-span-2 flex flex-col justify-between">
-                <h2 class="text-base font-bold text-slate-800 mb-4">Taburan Kajian Mengikut Daerah Utama (PPD)</h2>
-                <div class="relative h-64">
-                    <canvas id="daerahChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Chart 3: Trend Bulanan -->
-            <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm lg:col-span-3 flex flex-col justify-between">
-                <h2 class="text-base font-bold text-slate-800 mb-4">Trend Permohonan Diproses Mengikut Bulan (2026)</h2>
-                <div class="relative h-64">
-                    <canvas id="bulanChart"></canvas>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <!-- JavaScript Data & Chart Execution -->
-    <script>
-        // 1. Doughnut Chart: Peringkat Pengajian
-        new Chart(document.getElementById('peringkatChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['Sarjana (Master)', 'Doktor Falsafah (PhD)', 'Sarjana Muda', 'Geran / Penyelidikan'],
-                datasets: [{
-                    data: [24, 16, 6, 4],
-                    backgroundColor: ['#6366f1', '#8b5cf6', '#3b82f6', '#10b981']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { position: 'bottom' } }
-            }
-        });
-
-        // 2. Bar Chart: Daerah / PPD
-        new Chart(document.getElementById('daerahChart'), {
-            type: 'bar',
-            data: {
-                labels: ['Tuaran', 'Kota Kinabalu', 'Ranau', 'Beaufort', 'Tawau', 'Sandakan', 'Papar', 'Keningau'],
-                datasets: [{
-                    label: 'Jumlah Kajian',
-                    data: [14, 12, 7, 6, 6, 5, 5, 4],
-                    backgroundColor: '#4f46e5',
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } },
-                plugins: { legend: { display: false } }
-            }
-        });
-
-        // 3. Line Chart: Trend Bulanan
-        new Chart(document.getElementById('bulanChart'), {
-            type: 'line',
-            data: {
-                labels: ['Januari', 'Februari', 'Mac', 'April'],
-                datasets: [{
-                    label: 'Permohonan Diproses',
-                    data: [17, 18, 11, 9],
-                    borderColor: '#059669',
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-    </script>
-</body>
-</html>
+<body class="bg-slate-50 text-slate-800 p-4 md:p-8 font-sans">
+<div class="max-w-7xl mx-auto space-y-6">
+<header class="bg-gradient-to-r from-indigo-950 to-indigo-800 text-white rounded-2xl p-6 shadow-lg flex flex-col md:flex-row justify-between gap-4 md:items-center"><div><h1 class="text-2xl md:text-3xl font-bold">Dashboard Analisis Kajian JPN Sabah 2026</h1><p class="text-indigo-200 mt-1">Permohonan penyelidikan pendidikan • data sehingga 21 Ogos 2026</p></div><span class="bg-emerald-500 px-3 py-1.5 rounded-full text-xs font-semibold w-fit">Dikemas kini: Ogos 2026</span></header>
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+<div class="card"><small>Jumlah Permohonan</small><b>178</b><em>Jan–Ogos 2026</em></div>
+<div class="card"><small>Selesai</small><b class="text-emerald-600">149</b><em>83.7% daripada jumlah</em></div>
+<div class="card"><small>Dalam Proses</small><b class="text-amber-600">28</b><em>Kunci masuk + tandatangan</em></div>
+<div class="card"><small>Bulan Tertinggi</small><b class="text-indigo-600">Ogos</b><em>64 permohonan</em></div>
+<div class="card col-span-2 lg:col-span-1"><small>PPD Paling Kerap Terlibat</small><b class="text-violet-600">Tuaran</b><em>67 kajian*</em></div>
+</div>
+<div class="grid lg:grid-cols-3 gap-6">
+<section class="panel lg:col-span-2"><h2>Trend Permohonan Mengikut Bulan</h2><div class="h-72"><canvas id="bulan"></canvas></div></section>
+<section class="panel"><h2>Peringkat / Jenis Kajian</h2><div class="h-72"><canvas id="peringkat"></canvas></div></section>
+<section class="panel lg:col-span-2"><div class="flex justify-between items-center"><h2>Taburan Penglibatan PPD</h2><span class="text-xs text-slate-400">termasuk kajian multi-PPD / seluruh Sabah</span></div><div class="h-[520px]"><canvas id="ppd"></canvas></div></section>
+<section class="panel"><h2>Status Progres</h2><div class="h-64"><canvas id="progres"></canvas></div><div class="mt-5 bg-slate-50 rounded-xl p-4 text-sm"><p class="font-semibold mb-2">Sorotan pantas</p><p>• 149 rekod telah selesai</p><p>• 18 masih pada peringkat kunci masuk</p><p>• 10 dalam proses tandatangan</p><p>• Julai merekodkan 0 pemprosesan dalam fail semasa</p></div></section>
+</div>
+<section class="panel"><h2>Ringkasan Analitik</h2><div class="grid md:grid-cols-3 gap-4 text-sm"><div class="insight"><b>Lonjakan Ogos</b><p>64 permohonan, iaitu 36.0% daripada keseluruhan rekod tahun ini.</p></div><div class="insight"><b>Pengajian Pascasiswazah Dominan</b><p>Sarjana + PhD berjumlah 128 rekod (71.9%).</p></div><div class="insight"><b>Liputan Daerah Luas</b><p>Tuaran, Kota Kinabalu, Beaufort dan Sandakan antara PPD paling kerap muncul dalam lokasi kajian.</p></div></div></section>
+<footer class="text-xs text-slate-400 text-center pb-4">Sumber: DATA INDUK KAJIAN 2026 • *Kiraan PPD ialah bilangan rekod yang melibatkan PPD berkenaan; satu kajian boleh melibatkan lebih daripada satu PPD.</footer>
+</div>
+<style>.card,.panel{background:white;border:1px solid #e2e8f0;border-radius:1rem;box-shadow:0 1px 2px #0000000d}.card{padding:1.25rem}.card small{display:block;text-transform:uppercase;letter-spacing:.06em;color:#64748b;font-weight:600;font-size:.7rem}.card b{display:block;font-size:1.8rem;margin-top:.35rem}.card em{font-style:normal;color:#64748b;font-size:.75rem}.panel{padding:1.25rem}.panel h2{font-weight:700;margin-bottom:1rem}.insight{background:#f8fafc;border-radius:.75rem;padding:1rem}.insight p{color:#64748b;margin-top:.35rem}</style>
+<script>
+Chart.defaults.font.family='ui-sans-serif,system-ui,sans-serif'; Chart.defaults.color='#64748b';
+new Chart(document.getElementById('bulan'),{type:'line',data:{labels:['Jan','Feb','Mac','Apr','Mei','Jun','Jul','Ogos'],datasets:[{label:'Permohonan',data:[17,18,10,17,23,29,0,64],borderColor:'#059669',backgroundColor:'rgba(5,150,105,.10)',fill:true,tension:.3,pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
+new Chart(document.getElementById('peringkat'),{type:'doughnut',data:{labels:['Sarjana','PhD','Sarjana Muda','Geran/Penyelidikan','Kajian','Tidak dinyatakan'],datasets:[{data:[69,59,40,5,4,1],backgroundColor:['#4f46e5','#7c3aed','#2563eb','#059669','#d97706','#94a3b8']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}}});
+new Chart(document.getElementById('progres'),{type:'doughnut',data:{labels:['Selesai','Kunci Masuk','Proses Tandatangan','Tidak dinyatakan'],datasets:[{data:[149,18,10,1],backgroundColor:['#10b981','#f59e0b','#6366f1','#cbd5e1']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom'}}}});
+const labels=['Tuaran','Kota Kinabalu','Beaufort','Sandakan','Keningau','Papar','Penampang','Tambunan','Tawau','Kota Belud','Ranau','Beluran','Kudat','Lahad Datu','Pensiangan','Pitas','Kota Marudu','Sipitang','Tenom','Kinabatangan','Semporna','Kuala Penyu','Kunak','Telupid/Tongod'];
+const vals=[67,52,44,43,41,41,41,41,41,40,40,39,38,38,38,37,37,37,37,36,36,35,33,32];
+new Chart(document.getElementById('ppd'),{type:'bar',data:{labels:labels,datasets:[{label:'Kajian melibatkan PPD',data:vals,backgroundColor:'#4f46e5',borderRadius:5}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,scales:{x:{beginAtZero:true,ticks:{precision:0}}},plugins:{legend:{display:false}}}});
+</script></body></html>
